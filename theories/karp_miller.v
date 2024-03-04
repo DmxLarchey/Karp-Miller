@@ -1285,7 +1285,7 @@ Section Petri_Net.
      transition sequence that would lead to the covering. However, if one 
      wants the whole transition sequence to the covering (not only the 
      accelerated one), one would need to keep more information in the 
-     soundness theorem above, ie Δseq_cover_soundness. Probably a not 
+     soundness theorem above, ie Δseq_cover_soundness. Possibly a not 
      very complicated enhancement. *)
 
   Theorem pn_coverable_km_tree_dec a b : decider (pn_coverable a b).
