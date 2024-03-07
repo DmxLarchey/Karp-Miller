@@ -12,7 +12,7 @@
 # What is this project
 
 The project contains a correct by construction algorithm for deciding _coverability for Petri nets_, based on the construction of the 
-Karp-Miller tree. It crucially exploits Dickson's lemma from the `Kruskal-AlmostFull` library
+Karp-Miller tree. It crucially exploits Dickson's lemma from the [`Kruskal-AlmostFull`](https://github.com/DmxLarchey/Kruskal-AlmostFull) library
 
 ```coq
 af_vec_fall2 n X R : af R → af (λ u v : vec X n, ∀ i, R u⦃i⦄ v⦃i⦄).
