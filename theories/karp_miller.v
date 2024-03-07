@@ -260,8 +260,8 @@ Section Petri_Net.
   Tactic Notation "induction" "seq" "on" hyp(H) := 
     induction seq on H as ? ? ? ? ? ? ?. 
 
-  Definition pn_reacheable a b := ∃ lt, a =[lt]=> b.
-  Definition pn_coverable s a := ∃b, pn_reacheable s b ∧ a ≦⁺ b.
+  Definition pn_reachable a b := ∃ lt, a =[lt]=> b.
+  Definition pn_coverable s a := ∃b, pn_reachable s b ∧ a ≦⁺ b.
 
   Hint Resolve pn_trans_plus : core.
 
