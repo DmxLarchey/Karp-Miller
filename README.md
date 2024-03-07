@@ -15,21 +15,22 @@ The project contains a correct by construction algorithm for deciding _coverabil
 Karp-Miller tree. It crucially exploits Dickson's lemma from the `Kruskal-AlmostFull` library
 
 ```coq
-af_vec_fall2 n X (R : rel₂ X) : af R → af (λ u v : vec X n, ∀ i, R u⦃i⦄ v⦃i⦄).
+af_vec_fall2 n X R : af R → af (λ u v : vec X n, ∀ i, R u⦃i⦄ v⦃i⦄).
 ```
 
 The project is loosely inspired from an [Mathematical Components based version](https://bitbucket.org/mituharu/karpmiller/src/master/)
-based on the paper [_Formalization of Karp-Miller tree construction on petri nets_](https://dl.acm.org/doi/10.1145/3018610.3018626).
+based on the paper [_Formalization of Karp-Miller tree construction on Petri nets (CPP 2017)_](https://dl.acm.org/doi/10.1145/3018610.3018626).
+
 It was started as a basis for further discussions with the team of [Jérôme Leroux of LaBRI](https://www.labri.fr/perso/leroux/).
 
 The main statement that we prove here is the following:
 ```coq
-(* with imports from Relations KruskalTrees, KruskalFinite and KruskalAFProp *)
+(** with imports from Relations, KruskalTrees, KruskalFinite
+    and KruskalAFProp *)
 
 Variables (NbPlaces : nat)             (* number of places *)
           (TrIdx : Type)               (* type of indices of transitions *)
-          (TrIdx_fin : finite TrIdx)   (* finitely many transitions *)
-          .
+          (TrIdx_fin : finite TrIdx).  (* finitely many transitions *)
 
 Notation place := (idx NbPlaces).
 Notation marking := (vec nat NbPlaces).
@@ -43,7 +44,7 @@ Variables (pre post : TrIdx → marking).
 
 (* One Petri net transition *)
 Inductive pn_trans : X → X → Prop :=
-  | pn_tg_cons t u : pn_trans_gen t (u +ₘ pre t) (u +ₘ post t).
+  | pnt_intro t u : pn_trans (u +ₘ pre t) (u +ₘ post t).
 
 (* Reachability and coverability *)
 Definition pn_reachable a b := clos_refl_trans pn_trans a b.
