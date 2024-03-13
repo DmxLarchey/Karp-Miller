@@ -16,7 +16,7 @@ bug-reports: "https://github.com/DmxLarchey/Karp-Miller/issues"
 dev-repo: "git+https://github.com:DmxLarchey/Karp-Miller/"
 
 build: [
-  [ make "-j%{jobs}%"]
+  [make "-j%{jobs}%"]
 ]
 install: [
   [make "install"]
