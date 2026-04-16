@@ -23,7 +23,7 @@ install: [
 ]
 
 depends: [
-  "rocq-core" { >= "9.2" & & < "9.3~"}
+  "rocq-core" { >= "9.2" & < "9.3~"}
   "rocq-stdlib"
   "coq-kruskal-trees"
   "coq-kruskal-finite"
