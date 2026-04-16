@@ -12,6 +12,7 @@ jobs:
   build:
     # the OS must be GNU/Linux to be able to use the docker-coq-action
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         coq_version: 
@@ -19,12 +20,42 @@ jobs:
         ocaml_version:
           - '4.14-flambda'
       fail-fast: true
+
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: coq-community/docker-coq-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
         with:
-          opam_file: 'opam'
-          custom_image: ${{ matrix.image }}
+          fetch-depth: 1
+
+      - name: Docker-Coq-Action
+        uses: coq-community/docker-coq-action@v1
+        with:
+          coq_version: ${{ matrix.coq_version }}
+          ocaml_version: ${{ matrix.ocaml_version }}
+          before_script: |
+            startGroup "Workaround permission issue"
+              sudo chown -R 1000:1000 .  # <--
+              opam exec -- ocamlfind list
+            endGroup
+          before_install: |
+            startGroup "Print opam config"
+              sudo chown -R 1000:1000 .  
+              opam config list; opam repo list; opam list
+            endGroup
+          script: |
+            startGroup "Build project"
+              opam exec -- make -j 2 all TIMED=1
+            endGroup
+          uninstall: |
+            startGroup "Clean project"
+            endGroup
+
+      - name: Revert permissions
+        # to avoid a warning at cleanup time
+        if: ${{ always() }}
+        run: sudo chown -R 1001:116 .  # <--
+
 
 # See also:
 # https://github.com/coq-community/docker-coq-action#readme
