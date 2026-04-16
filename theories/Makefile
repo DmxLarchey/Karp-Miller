@@ -1,24 +1,23 @@
-all: Makefile.coq
-	@+$(MAKE) -f Makefile.coq all
+all: Makefile.rocq
+	@+$(MAKE) -f Makefile.rocq all
 
-clean: Makefile.coq
-	@+$(MAKE) -f Makefile.coq clean
-	rm -f Makefile.coq Makefile.coq.conf
+clean: Makefile.rocq
+	@+$(MAKE) -f Makefile.rocq cleanall
+	@rm -f Makefile.rocq Makefile.rocq.conf
 	find \( -name "*.aux" -o -name "*.vo*" -o -name "*.glob" \) -exec rm -f {} \;
 
-Makefile.coq: _CoqProject
-	coq_makefile -f _CoqProject -o Makefile.coq
-
-force _CoqProject Makefile: ;
+Makefile.rocq: _CoqProject
+	$(COQBIN)rocq makefile -f _CoqProject -o Makefile.rocq
 
 whitespaces: force
 	find . -type f -name "*.v" -exec sed --in-place 's/[[:space:]]\+$$//' {} \+
 
-wc: force
-	coqwc `find -name "*.v"`
+wc:
+	$(COQBIN)rocq wc `find . -name "*.v"`
 
-%: Makefile.coq force
-	@+$(MAKE) -f Makefile.coq $@
+force _CoqProject Makefile: ;
+
+%: Makefile.rocq force
+	@+$(MAKE) -f Makefile.rocq $@
 
 .PHONY: all clean force
-

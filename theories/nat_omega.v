@@ -7,7 +7,7 @@
 (*        Mozilla Public License Version 2.0, MPL-2.0         *)
 (**************************************************************)
 
-From Coq
+From Stdlib
   Require Import Arith Utf8.
 
 From KruskalTrees
@@ -24,10 +24,10 @@ Set Implicit Arguments.
 
 (* Ω := ω+1 *)
 Definition nat_omega := option nat.
-#[global] Notation Ω := nat_omega.
+#[global] Abbreviation Ω := nat_omega.
 
-#[global] Notation ω := (None).
-#[global] Notation "⌞ n ⌟" := (Some n) (at level 1, format "⌞ n ⌟").
+#[global] Abbreviation ω := (None).
+#[global] Notation "⌞ n ⌟" := (Some n) (at level 0, format "⌞ n ⌟").
 
 (* Natural strict order on Ω: 0 < 1 < ... < n < ... < ω *)
 Definition lt_Ω (x y : Ω) :=

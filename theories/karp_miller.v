@@ -7,7 +7,7 @@
 (*        Mozilla Public License Version 2.0, MPL-2.0         *)
 (**************************************************************)
 
-From Coq
+From Stdlib
   Require Import Arith List Relations Utf8 Wellfounded.
 
 From KruskalTrees
@@ -77,10 +77,10 @@ Section Petri_Net.
             (TrIdx_fin : finite TrIdx)   (* listably/finitely many transitions *)
             .
 
-  Notation place := (idx NbPlaces).
+  Abbreviation place := (idx NbPlaces).
 
-  Notation marking := (vec nat NbPlaces).
-  Notation Ωmarking := (vec Ω NbPlaces).
+  Abbreviation marking := (vec nat NbPlaces).
+  Abbreviation Ωmarking := (vec Ω NbPlaces).
 
   Implicit Types (lt mt : list TrIdx)
                  (t : TrIdx) 

@@ -7,7 +7,7 @@
 (*        Mozilla Public License Version 2.0, MPL-2.0         *)
 (**************************************************************)
 
-From Coq
+From Stdlib
   Require Import List Relations Utf8.
 
 From KruskalTrees
@@ -30,7 +30,7 @@ Set Implicit Arguments.
 
 Module iseq_notations.
 
-  Notation ε := (@nil _).
+  Abbreviation ε := (@nil _).
   Notation "l '∹' x" := (cons x l) (at level 61, left associativity, format "l  ∹  x").
   Notation "l '∺' m" := (app m l)  (at level 61, left associativity, format "l  ∺  m").
 

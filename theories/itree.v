@@ -7,7 +7,7 @@
 (*        Mozilla Public License Version 2.0, MPL-2.0         *)
 (**************************************************************)
 
-From Coq
+From Stdlib
   Require Import List Relations Utf8.
 
 From KruskalTrees
@@ -105,6 +105,10 @@ Section itree.
 
   Definition itree_rec (P : _ → Set) := itree_rect P.
   Definition itree_ind (P : _ → Prop) := itree_rect P.
+
+  #[global] Register Scheme itree_rect as rect_dep for itree.
+  #[global] Register Scheme itree_rec as rec_dep for itree.
+  #[global] Register Scheme itree_ind as ind_dep for itree.
 
   Section itree_fall.
 
